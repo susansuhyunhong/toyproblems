@@ -4,18 +4,21 @@
 
 function longestNonDesc(seq){
   var lengthUntil = [1]; // initialize first value's lengthUntil of sequence
+  var maxLength = 1; // added to reduce time complexity
   for(let i = 1; i < seq.length; i++){ // curr val
     for(let j = 0; j < i; j++){ // prev vals
-        if(!lengthUntil[i]) lengthUntil[i] = 1;
-        if(seq[j] <= seq[i]){ // non-decreasing (prev <= curr)
-          // console.log( 'prev:', j, 'curr:', i, lengthUntil )
-          if(lengthUntil[i] < lengthUntil[j]+1 ){ // only when replacing lengthUntil is larger than before
-            lengthUntil[i] = lengthUntil[j]+1; // increase length
-          }
+      if(!lengthUntil[i]) lengthUntil[i] = 1;
+      if(seq[j] <= seq[i]){ // non-decreasing (prev <= curr)
+        // console.log( 'prev:', j, 'curr:', i, lengthUntil )
+        if(lengthUntil[i] < lengthUntil[j]+1 ){ // only when replacing lengthUntil is larger than before
+          lengthUntil[i] = lengthUntil[j]+1; // increase length
         }
+      }
     }
+    if(lengthUntil[i] > maxLength) maxLength = lengthUntil[i]; // compare the max value while iteration
   }
-  return Math.max(...lengthUntil);
+  // return Math.max(...lengthUntil);
+  return maxLength;
 }
 console.log(longestNonDesc([5, 3, 4, 8, 6, 7])); //4
 console.log(longestNonDesc([1, 17, 5, 10, 13, 15, 10, 5, 16, 8])); //6
