@@ -1,7 +1,11 @@
+// Given a large array of integers and a window of size 'w',
+// find the current maximum in the window as the window slides through the entire array.
+// Time - O(n), Space - O(w)
+
 let findMaxInSlidingWindow = (array, w) => {
   let maxes = [];
-  let heap = []; // use max heap to keep track of max values
-  let invalid = undefined; // store the left outer variable of the current window
+  let heap = []; // max heap to keep track of max values
+  let invalid = undefined; // store left outer variable of current window
 
   array.forEach((num, i) => {
     if(i === 0) {
