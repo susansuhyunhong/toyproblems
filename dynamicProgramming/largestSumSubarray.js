@@ -14,7 +14,7 @@ function largestSumSubarray(arr){
   let currEndIndex = 0;
 
   for( let i = 0 ; i < arr.length ; i++ ){
-
+    // 1. Update current sum related variables while iteration
     if(currSum + arr[i] > arr[i]) {
       currSum += arr[i];
       currEndIndex = i;
@@ -23,18 +23,17 @@ function largestSumSubarray(arr){
       currStartIndex = i;
       currEndIndex = i; // ** Update end index also
     }
-
+    // 2. Replace max sum when curr sum exceeds the max sum
     if(currSum > maxSum){
       maxSum = currSum;
       maxEndIndex = currEndIndex;
       maxStartIndex = currStartIndex;
-      // console.log(maxStartIndex, maxEndIndex)
     }
-    console.log('maxSum:',maxSum,'currSum:',currSum, 'maxStartIndex:',maxStartIndex, 'maxEndIndex:', maxEndIndex)
+    // console.log('maxSum:',maxSum,'currSum:',currSum, 'maxStartIndex:',maxStartIndex, 'maxEndIndex:', maxEndIndex)
   }
   return arr.slice(maxStartIndex, maxEndIndex+1);
 }
 
 console.log(largestSumSubarray([-4, 2, -5, 1, 2, 3, 6, -5, 1])); //[1, 2, 3, 6]
 console.log(largestSumSubarray([-1, 2, 4, 9, 10, -99, 2, -2, 100])); //[100]
-console.log(largestSumSubarray([]));
+console.log(largestSumSubarray([])); //[]
