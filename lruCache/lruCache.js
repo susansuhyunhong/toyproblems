@@ -90,7 +90,7 @@ cache.set("item4", 4);
 console.log(cache.get("item3")); //=> 3
 
 console.log(cache.get("item2")); //=> 2
-// check how cache looks like
+// // check how cache looks like
 // let curr4 = cache.items.head;
 // while(curr4){
 //   console.log("^^^",curr4.val.item )

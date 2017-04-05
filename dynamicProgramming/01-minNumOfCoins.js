@@ -32,5 +32,6 @@ function minNumofCoins (valuesArr, sum){
   return min[sum];
 }
 
-var res = minNumofCoins([1,3,5], 11);
+// edge case when coin is bigger than sum
+var res = minNumofCoins([2,3,5], 11);
 console.log(res);
