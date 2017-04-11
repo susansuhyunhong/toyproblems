@@ -28,12 +28,12 @@
  * Feel free to use Google in searching for your ideal implementation!
  */
 
-var jsonpRequest = function(url, callback) {
-  var script = document.createElement("script");
-  script.setAttribute("type", "application/javascript");
-  script.setAttribute("src", url + "?callback=" + callback);
-  document.body.appendChild(script);
-};
+// var jsonpRequest = function(url, callback) {
+//   var script = document.createElement("script");
+//   script.setAttribute("type", "application/javascript");
+//   script.setAttribute("src", url + "?callback=" + callback);
+//   document.body.appendChild(script);
+// };
 // var jsonpDispatcher = {};
 //
 // var jsonpRequest = function(url, callback) {
@@ -50,6 +50,30 @@ var jsonpRequest = function(url, callback) {
 //
 //   document.body.appendChild(script);
 // };
+//
+
+var jsonpDispatcher = {};
+var jsonpRequest = (function() {
+  var key = 0;
+
+  return function(url, callback) {
+    var i = ++key;
+
+    jsonpDispatcher[i] = function() {
+      callback.apply(this, arguments);
+      delete jsonpDispatcher[i];
+
+	 var e = document.body.getElementsByClassName('script');
+	 e[0].parentNode.removeChild(e[0]);
+    };
+
+    var script = document.createElement('script');
+    script.src = url + '?callback=jsonpDispatcher[' + key + ']';
+    script.className = 'script';
+    document.body.appendChild(script);
+
+  };
+}() );
 
 jsonpRequest('http://toy-problems.hackreactor.com:3003/jsonparty', function (data) {
   console.log(data.response); // "Aw yeah, now we're JSONPartying"
