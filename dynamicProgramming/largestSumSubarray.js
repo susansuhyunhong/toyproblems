@@ -37,3 +37,4 @@ function largestSumSubarray(arr){
 console.log(largestSumSubarray([-4, 2, -5, 1, 2, 3, 6, -5, 1])); //[1, 2, 3, 6]
 console.log(largestSumSubarray([-1, 2, 4, 9, 10, -99, 2, -2, 100])); //[100]
 console.log(largestSumSubarray([])); //[]
+console.log(largestSumSubarray([-4, 3, -1, 2, 3])) //[3,-1,2,3]
